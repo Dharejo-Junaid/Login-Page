@@ -1,5 +1,7 @@
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import java.awt.Dimension;
@@ -7,10 +9,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginPage extends JFrame {
+public class LoginPage extends JFrame implements ActionListener {
     
     GridBagConstraints c;
+    JTextField username, password;
 
     public LoginPage() {
 
@@ -31,7 +36,7 @@ public class LoginPage extends JFrame {
         c.gridy++;
         this.add(usernameLabel, c);
 
-        JTextField username = new JTextField();
+        username = new JTextField();
         username.setPreferredSize(new Dimension(200, 30));
         c.gridy++;
         this.add(username, c);
@@ -41,13 +46,35 @@ public class LoginPage extends JFrame {
         c.gridy++;
         this.add(passwordLabel, c);
 
-        JTextField password = new JTextField();
+        password = new JTextField();
         password.setPreferredSize(new Dimension(200, 30));
         c.gridy++;
         this.add(password, c);
 
+        JButton loginButton = new JButton("\t\tLogin\t\t");
+        loginButton.addActionListener(this);
+        c.gridy++;
+        this.add(loginButton, c);
+
 
         this.setVisible(true);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String username = this.username.getText().trim();
+        String password = this.password.getText().trim();
+
+        if(username.equals("Junaid") && password.equals("123456")) {
+            JOptionPane.showMessageDialog(this, "Login successful",
+             "Successful", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        else {
+            JOptionPane.showMessageDialog(this, "Login Failed",
+            "Failed", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 }
